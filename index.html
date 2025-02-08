@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Eletrônico de Registro de Ocorrências e Gestão de Viaturas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.tidio.co/t7269ujaw6uq7bry6enx37gxsxyyflxc.js" async></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background: #000;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 90px;
+        }
+
+        header {
+            width: 100%;
+            background: #003366;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header .menu {
+            display: flex;
+            justify-content: center;
+        }
+
+        header .menu ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        header .menu li {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        header .menu a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+            transition: 0.3s ease;
+            border-radius: 5px;
+        }
+
+        header .menu a:hover {
+            background-color: #00aaff;
+        }
+
+        .main-container {
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .title {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 0 10px #00aaff;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            position: relative;
+        }
+
+        .title i {
+            font-size: 22px;
+            color: #fff;
+            margin-left: 10px;
+            position: absolute;
+            top: -5px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #00aaff;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            justify-items: center;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #003366, #0066cc);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 170, 255, 0.5);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 170, 255, 1);
+            background-color: #00aaff;
+        }
+
+        .card i {
+            font-size: 50px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .qualificados {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .qualificados button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #ff6600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            width: 100%;
+            max-width: 220px;
+            transition: background-color 0.3s;
+        }
+
+        .qualificados button:hover {
+            background-color: #e65c00;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 36px;
+            }
+
+            .card {
+                width: 100%;
+                padding: 15px;
+                max-width: 270px;
+            }
+
+            .card i {
+                font-size: 40px;
+            }
+
+            .qualificados .button {
+                width: 90%;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 28px;
+            }
+
+            .card {
+                width: 100%;
+                padding: 10px;
+                max-width: 200px;
+            }
+
+            .card i {
+                font-size: 35px;
+            }
+
+            .qualificados .button {
+                width: 100%;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trilha Sonora -->
+    <audio id="audio" autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <header>
+        <div class="menu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Boletins</a></li>
+                <li><a href="#">Viaturas</a></li>
+                <li><a href="#">Consultar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <h1 class="title">REPORTE <i class="fas fa-info-circle"></i></h1>
+        <h2 class="subtitle">REGISTRO ELETRÔNICO DE POLICIAMENTO ORDINÁRIO E RELATÓRIO TÉCNICO ESTATÍSTICO DE INTELIGÊNCIA</h2>
+
+        <div class="cards-container">
+            <div class="card" onclick="toggleQualificados('boletim')">
+                <i class="fas fa-file-alt"></i>
+                <h3>Boletim de Ocorrência</h3>
+            </div>
+            <div class="card" onclick="toggleQualificados('bos')">
+                <i class="fas fa-clipboard-check"></i>
+                <h3>Boletim Simplificado</h3>
+            </div>
+            <div class="card" onclick="window.location.href='https://docs.google.com/forms/AV'">
+                <i class="fas fa-gas-pump"></i>
+                <h3>Abastecimento de Viaturas</h3>
+            </div>
+            <div class="card" onclick="window.location.href='https://docs.google.com/forms/KM'">
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>Abertura de KM das Viaturas</h3>
+            </div>
+            <div class="card" onclick="window.location.href='https://docs.google.com/forms/AVT'">
+                <i class="fas fa-car"></i>
+                <h3>Abertura das Viaturas</h3>
+            </div>
+
+            <!-- Botão IA de Relatório -->
+            <div class="card" onclick="openChatBot()">
+                <i class="fas fa-brain"></i>
+                <h3>IA - Ajuda no Relatório</h3>
+            </div>
+        </div>
+
+        <div class="qualificados" id="qualificados">
+            <button onclick="window.location.href='https://docs.google.com/forms/qualificado1'">1 Qualificado</button>
+            <button onclick="window.location.href='https://docs.google.com/forms/qualificado2'">2 Qualificados</button>
+            <button onclick="window.location.href='https://docs.google.com/forms/qualificado3'">3 Qualificados</button>
+            <button onclick="window.location.href='https://docs.google.com/forms/qualificado4'">4 Qualificados</button>
+            <button onclick="window.location.href='https://docs.google.com/forms/qualificado5'">5 Qualificados</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir o chatbot IA
+        function openChatBot() {
+            window.open('https://chatgpt.com/', '_blank', 'width=500,height=600');
+        }
+
+        // Função para mostrar e esconder os botões de qualificados
+        function toggleQualificados(buttonId) {
+            const qualificados = document.getElementById('qualificados');
+            const qualificadosStyle = qualificados.style.display;
+
+            if (buttonId === 'boletim' || buttonId === 'bos') {
+                qualificados.style.display = qualificadosStyle === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
+</body>
+</html>
